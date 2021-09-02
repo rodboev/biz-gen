@@ -1,0 +1,41 @@
+        {
+            "id": "t4PA7TuIg2TCxBkVuRw7AA",
+            "alias": "pho-tay-ho-brooklyn",
+            "name": "Pho Tay Ho",
+            "image_url": "https://s3-media2.fl.yelpcdn.com/bphoto/XxlImvK74ebH_NijaojNgQ/o.jpg",
+            "is_closed": false,
+            "url": "https://www.yelp.com/biz/pho-tay-ho-brooklyn?adjust_creative=dPvMeKBdxYCnF_Zt1ppaDA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=dPvMeKBdxYCnF_Zt1ppaDA",
+            "review_count": 426,
+            "categories": [
+                {
+                    "alias": "vietnamese",
+                    "title": "Vietnamese"
+                }
+            ],
+            "rating": 3.5,
+            "coordinates": {
+                "latitude": 40.600039,
+                "longitude": -73.990132
+            },
+            "transactions": [
+                "delivery",
+                "pickup"
+            ],
+            "price": "$",
+            "location": {
+                "address1": "2351 86th St",
+                "address2": "",
+                "address3": "",
+                "city": "Brooklyn",
+                "zip_code": "11214",
+                "country": "US",
+                "state": "NY",
+                "display_address": [
+                    "2351 86th St",
+                    "Brooklyn, NY 11214"
+                ]
+            },
+            "phone": "+17184490199",
+            "display_phone": "(718) 449-0199",
+            "distance": 747.5844266330952
+        }
