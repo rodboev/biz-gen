@@ -1,7 +1,9 @@
 {
   "dependencies": {
     "axios": "^0.21.1",
+    "axios-cache-adapter": "^2.7.3",
     "dotenv": "^10.0.0",
-    "mongoose": "^6.0.4"
+    "mongoose": "^6.0.4",
+    "redis": "^3.1.2"
   }
 }
