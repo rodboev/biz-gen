@@ -27,8 +27,8 @@ async function saveToDb(results) {
 }
 
 async function searchYelp({ params }) {
-  const cacheLength = await api.cache.length();
-  console.log(`Requesting: ${api.getUri({url: '', params })}`); // (cached: ${cacheLength})
+  // const cacheLength = await api.cache.length();
+  console.log(`Requesting: ${api.getUri({url: '', params })}`);
   
   try {
     const response = await api({ params });
@@ -52,8 +52,13 @@ async function searchYelp({ params }) {
     const { results, total } = await searchYelp({ params });
     console.log(`Received ${total} results`);
 
-    if (total > 1000) {
-      // break up into categories, 8 at a time
+    if (total > 5000) {
+      // zip code is probably bad
+      console.log('Skipping location');
+      continue;
+    }
+    else if (total > 1000) {
+      // break up into categories
       for (category of categories) {
         delete params.offset;
         params = {
