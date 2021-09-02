@@ -1,6 +1,7 @@
 const schema = {
     "id": {
-      "type": "string"
+      "type": "string",
+      "unique": true
     },
     "alias": {
       "type": "string"

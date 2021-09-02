@@ -15,52 +15,41 @@ const instance = axios.create({
 
 // MongoDB
 const businessSchema = new mongoose.Schema(schema);
-
 const Business = mongoose.model('Business', businessSchema);
 
 async function main() {
   await mongoose.connect('mongodb://localhost:27017/test');
   let savedRecords = 0;
 
-  // Make first query
-  const params = {
-    location: '11214',
-    limit: 50
-  };
-  console.log('Requesting: ' + instance.getUri({url: '', params }));
-  const response = await instance({ params });
-  const results = response.data.businesses;
-
-  // Save results
-  for (const result of results) {
-    const record = new Business(result);
-    await record.save();
-    savedRecords++;
-  }
-  console.log(`Saved ${savedRecords} records to DB.`);
-
-  // Make additional queries
-  const total = response.data.total;
-  const additionalReqs = Math.ceil((total - 50) / 50);
-
-  for (let i = 0; i < additionalReqs; i++) {
+  let i = 0;
+  let total;
+  do {
     const params = {
       location: '11214',
       limit: 50,
-      offset: (i + 1) * 50
-    }
+      offset: (i * 50)
+    };
     console.log('Requesting: ' + instance.getUri({url: '', params }));
     const response = await instance({ params });
     const results = response.data.businesses;
-  
-    // Save results
+    total = response.data.total;
+
     for (const result of results) {
-      const record = new Business(result);
-      await record.save();
+      const filter = { id: result.id };
+      const update = result;
+      await Business.countDocuments(filter); // 0
+
+      let doc = await Business.findOneAndUpdate(filter, update, {
+        new: true,
+        upsert: true // Make this update into an upsert
+      });
       savedRecords++;
     }
-    console.log(`Saved ${savedRecords} records to DB.`);
+    i++;
   }
+  while (i < Math.ceil(total / 50));
+
+  console.log(`Saved ${savedRecords} records to DB.`);
 }
 
 main().catch(err => console.log(err));
